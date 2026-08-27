@@ -33,30 +33,3 @@ if st.button("주가 조회하기"):
 
     except Exception as e:
         st.error(f"오류가 발생했습니다: {e}")
-                x=df.index,
-                open=df['Open'], high=df['High'],
-                low=df['Low'], close=df['Close'],
-                name="주가"
-            ))
-            
-            # 이동평균선 추가
-            fig.add_trace(go.Scatter(x=df.index, y=df['MA20'], mode='lines', name='20일 이동평균선', line=dict(color='orange')))
-            fig.add_trace(go.Scatter(x=df.index, y=df['MA60'], mode='lines', name='60일 이동평균선', line=dict(color='blue')))
-            
-            fig.update_layout(title="주가 추이 및 이동평균선", xaxis_title="날짜", yaxis_title="주가 (KRW)", template="plotly_white")
-            st.plotly_chart(fig, use_container_width=True)
-            
-            # 거래량 차트
-            fig_vol = go.Figure()
-            fig_vol.add_trace(go.Bar(x=df.index, y=df['Volume'], name="거래량", marker_color='gray'))
-            fig_vol.update_layout(title="거래량 추이", xaxis_title="날짜", yaxis_title="거래량")
-            st.plotly_chart(fig_vol, use_container_width=True)
-
-    except Exception as e:
-        st.error(f"오류가 발생했습니다: {e}")
-            fig = px.bar(df, x="유형", y="거래량", color="유형", 
-                         color_discrete_map={"콜 옵션 (상승 베팅)": "green", "풋 옵션 (하락 베팅)": "red"})
-            st.plotly_chart(fig, use_container_width=True)
-            
-    except Exception as e:
-        st.error(f"데이터를 불러오는 중 오류가 발생했습니다: {e}")
