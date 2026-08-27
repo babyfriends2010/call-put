@@ -1,7 +1,6 @@
 import streamlit as st
 import yfinance as yf
 import pandas as pd
-import plotly.express as px
 
 st.set_page_config(page_title="한국 주식 차트 대시보드", layout="wide")
 
@@ -25,7 +24,7 @@ if st.button("주가 조회하기"):
             df['MA20'] = df['Close'].rolling(window=20).mean()
             df['MA60'] = df['Close'].rolling(window=60).mean()
             
-            # 주가 차트
+            # 주가 및 이동평균선 차트
             st.line_chart(df[['Close', 'MA20', 'MA60']])
             
             # 거래량 차트
